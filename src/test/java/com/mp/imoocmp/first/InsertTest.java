@@ -28,11 +28,12 @@ public class InsertTest {
     @Test
     public void insert() {
         User user = new User();
-        user.setName("局梦洁");
+        user.setRealName("魏霞");
         user.setAge(26);
         user.setEmail("xn@baomidou.com");
         user.setManagerId(1088248166370832385L);
         user.setCreateTime(LocalDateTime.now());
+        user.setRemark("我是一个备注信息");
         int rows = userMapper.insert(user);
         System.out.println(rows);
     }
