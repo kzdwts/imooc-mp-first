@@ -1,7 +1,14 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.10.137:3306/mp?useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.10.137:3306/mp?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8
     username: root
     password: 1024KangYong@MySQL
 
+# 日志输出
+logging:
+  level:
+    root: warn
+    com.mp.imoocmp.first.dao: trace
+  pattern:
+    console: '%p%m%n'
