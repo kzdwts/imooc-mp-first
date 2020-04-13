@@ -28,7 +28,7 @@ public class InsertTest {
     @Test
     public void insert() {
         User user = new User();
-        user.setRealName("魏霞");
+        user.setRealName("化工系");
         user.setAge(26);
         user.setEmail("xn@baomidou.com");
         user.setManagerId(1088248166370832385L);

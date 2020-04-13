@@ -40,6 +40,7 @@ public class User {
     // 创建时间
     private LocalDateTime createTime;
 
-    private transient String remark;
+    @TableField(exist = false)
+    private String remark;
 
 }
