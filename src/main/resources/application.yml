@@ -12,3 +12,8 @@ logging:
     com.mp.imoocmp.first.dao: trace
   pattern:
     console: '%p%m%n'
+
+# MyBatis-Plus
+#mybatis-plus:
+#  global-config:
+#    banner: true

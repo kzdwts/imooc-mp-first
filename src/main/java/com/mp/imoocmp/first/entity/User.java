@@ -1,7 +1,5 @@
 package com.mp.imoocmp.first.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -16,17 +14,13 @@ import java.time.LocalDateTime;
  * @version: v1.0
  */
 @Data
-@TableName("mp_user")
 public class User {
 
-
     // 主键
-    @TableId
-    private Long userId;
+    private Long id;
 
     // 姓名
-    @TableField("name")
-    private String realName;
+    private String name;
 
     // 年龄
     private Integer age;
@@ -40,7 +34,6 @@ public class User {
     // 创建时间
     private LocalDateTime createTime;
 
-    @TableField(exist = false)
-    private String remark;
+//    private String remark;
 
 }
