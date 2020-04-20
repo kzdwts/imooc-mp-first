@@ -1,5 +1,7 @@
 package com.mp.imoocmp.first.entity;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -20,6 +22,7 @@ public class User {
     private Long id;
 
     // 姓名
+    @TableField(condition = SqlCondition.LIKE)
     private String name;
 
     // 年龄

@@ -3,6 +3,7 @@ package com.mp.imoocmp.first;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.mp.imoocmp.first.dao.UserMapper;
 import com.mp.imoocmp.first.entity.User;
@@ -191,6 +192,53 @@ public class RetrieveTest {
         queryWrapper.select(User.class, info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"));
         List<User> userList = userMapper.selectList(queryWrapper);
 
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void testCondition() {
+        String name = "王";
+        String email = "";
+        condition(name, email);
+    }
+
+    public void condition(String name, String email) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        if (StringUtils.isNotEmpty(name)) {
+//            queryWrapper.likeRight("name", name);
+//        }
+//        if (StringUtils.isNotEmpty(email)) {
+//            queryWrapper.likeRight("email", email);
+//        }
+
+        queryWrapper.like(StringUtils.isNotEmpty(name), "name", name)
+                .like(StringUtils.isNotEmpty(email), "email", email);
+
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectByWrapperEntity() {
+        User whereUser = new User();
+        whereUser.setName("刘红雨");
+        whereUser.setAge(32);
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>(whereUser);
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectByWrapperAllEq() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "王天风");
+        params.put("age", null);
+        // queryWrapper.allEq(params, false);
+        queryWrapper.allEq((k, v) -> !k.equals("name"), params);
+
+        List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
 
