@@ -179,4 +179,19 @@ public class RetrieveTest {
         System.out.println(user);
     }
 
+    /**
+     * 名字中包含“雨”并且年龄小于40
+     */
+    @Test
+    public void selectByWrapperSupper() {
+        // 方法一
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("name", "雨");
+        queryWrapper.lt("age", 40);
+        queryWrapper.select(User.class, info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"));
+        List<User> userList = userMapper.selectList(queryWrapper);
+
+        userList.forEach(System.out::println);
+    }
+
 }
