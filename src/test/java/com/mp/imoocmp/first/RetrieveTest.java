@@ -1,10 +1,12 @@
 package com.mp.imoocmp.first;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
 import com.mp.imoocmp.first.dao.UserMapper;
 import com.mp.imoocmp.first.entity.User;
 import org.junit.Test;
@@ -295,6 +297,40 @@ public class RetrieveTest {
 
         User user = userMapper.selectOne(queryWrapper);
         System.out.println(user);
+    }
+
+    @Test
+    public void seleteLambda() {
+        // 3种方式创建对象
+        LambdaQueryWrapper<User> lambda = new QueryWrapper<User>().lambda();
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<User>();
+        LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+
+        // 查询
+        lambda.like(User::getName, "雨");
+        lambda.lt(User::getAge, 40);
+        List<User> userList = userMapper.selectList(lambda);
+        userList.forEach(System.out::println);
+    }
+
+    /**
+     * 姓名为王姓，并且（年龄小于40或邮箱不为空）
+     */
+    @Test
+    public void selectLambda2() {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = Wrappers.<User>lambdaQuery();
+        lambdaQueryWrapper.likeRight(User::getName, "王");
+        lambdaQueryWrapper.and(wq -> wq.lt(User::getAge, 40).or().isNotNull(User::getEmail));
+
+        List<User> userList = userMapper.selectList(lambdaQueryWrapper);
+        userList.forEach(System.out::println);
+
+    }
+
+    @Test
+    public void selectLambda3() {
+        List<User> userList = new LambdaQueryChainWrapper<User>(userMapper).likeRight(User::getName, "王").list();
+        userList.forEach(System.out::println);
     }
 
 }
