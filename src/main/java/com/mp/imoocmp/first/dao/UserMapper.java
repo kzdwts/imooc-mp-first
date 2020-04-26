@@ -1,7 +1,13 @@
 package com.mp.imoocmp.first.dao;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.mp.imoocmp.first.entity.User;
+import org.apache.ibatis.annotations.Param;
+//import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,4 +18,7 @@ import com.mp.imoocmp.first.entity.User;
  * @version: v1.0
  */
 public interface UserMapper extends BaseMapper<User> {
+
+//    @Select("select * from user ${ew.customSqlSegment}")
+    List<User> selectAll(@Param(Constants.WRAPPER) Wrapper<User> wrapper);
 }

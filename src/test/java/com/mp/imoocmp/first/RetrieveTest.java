@@ -333,4 +333,12 @@ public class RetrieveTest {
         userList.forEach(System.out::println);
     }
 
+    @Test
+    public void selectMy() {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = Wrappers.<User>lambdaQuery();
+        lambdaQueryWrapper.likeRight(User::getName, "王").and(wq -> wq.lt(User::getAge, 40).or().isNotNull(User::getEmail));
+        List<User> userList = userMapper.selectAll(lambdaQueryWrapper);
+        userList.forEach(System.out::println);
+    }
+
 }
