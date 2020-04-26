@@ -8,4 +8,8 @@
         select * from user ${ew.customSqlSegment}
     </select>
 
+    <select id="selectUserPage" resultType="com.mp.imoocmp.first.entity.User">
+        select * from user ${ew.customSqlSegment}
+    </select>
+
 </mapper>

@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
 import com.mp.imoocmp.first.dao.UserMapper;
 import com.mp.imoocmp.first.entity.User;
@@ -338,6 +340,45 @@ public class RetrieveTest {
         LambdaQueryWrapper<User> lambdaQueryWrapper = Wrappers.<User>lambdaQuery();
         lambdaQueryWrapper.likeRight(User::getName, "王").and(wq -> wq.lt(User::getAge, 40).or().isNotNull(User::getEmail));
         List<User> userList = userMapper.selectAll(lambdaQueryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectPage() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lt("age", 40);
+
+        Page<User> page = new Page<>(1, 2);
+        IPage<User> iPage = userMapper.selectPage(page, queryWrapper);
+        System.out.println("总页数：" + iPage.getPages());
+        System.out.println("总记录数：" + iPage.getTotal());
+        List<User> userList = iPage.getRecords();
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectPage2() {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = Wrappers.<User>lambdaQuery();
+        lambdaQueryWrapper.lt(User::getAge, 40);
+
+        Page<User> page = new Page<>(1, 2, false);
+        IPage<Map<String, Object>> iPage = userMapper.selectMapsPage(page, lambdaQueryWrapper);
+        System.out.println("总页数：" + iPage.getPages());
+        System.out.println("总记录数：" + iPage.getTotal());
+        List<Map<String, Object>> userList = iPage.getRecords();
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectMyPage() {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = Wrappers.<User>lambdaQuery();
+        lambdaQueryWrapper.lt(User::getAge, 40);
+
+        Page<User> page = new Page<>(1, 2, false);
+        IPage<User> iPage = userMapper.selectUserPage(page, lambdaQueryWrapper);
+        System.out.println("总页数：" + iPage.getPages());
+        System.out.println("总记录数：" + iPage.getTotal());
+        List<User> userList = iPage.getRecords();
         userList.forEach(System.out::println);
     }
 
