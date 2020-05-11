@@ -41,7 +41,8 @@ public class InsertTest {
     @Test
     public void insert02() {
         User user = new User();
-        user.setName("王丽丽");
+//        user.setId(123456789L);
+        user.setName("钱大富");
         user.setEmail("wll@baomidou.com");
         user.setManagerId(1088248166370832385L);
         user.setCreateTime(LocalDateTime.now());

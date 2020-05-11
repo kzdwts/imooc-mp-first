@@ -17,3 +17,6 @@ logging:
 mybatis-plus:
   mapper-locations:
   - com/mp/imoocmp/first/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: uuid

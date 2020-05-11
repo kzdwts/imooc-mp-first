@@ -30,7 +30,7 @@ public class UpdateTest {
     @Test
     public void updateById() {
         User user = new User();
-        user.setId(1088248166370832385L);
+//        user.setId(1088248166370832385L);
         user.setName("王天风");
         user.setAge(26);
         int rows = userMapper.updateById(user);

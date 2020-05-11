@@ -22,8 +22,8 @@ public class User extends Model<User> {
     private static final long serialVersionUID = 1L;
 
     // 主键
-    @TableId(type = IdType.AUTO)
-    private Long id;
+//    @TableId(type = IdType.ID_WORKER_STR)
+    private String id;
 
     // 姓名
 //    @TableField(condition = SqlCondition.LIKE)
