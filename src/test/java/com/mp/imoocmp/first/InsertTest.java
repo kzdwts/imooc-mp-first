@@ -38,4 +38,17 @@ public class InsertTest {
         System.out.println(rows);
     }
 
+    @Test
+    public void insert02() {
+        User user = new User();
+        user.setName("王丽丽");
+        user.setEmail("wll@baomidou.com");
+        user.setManagerId(1088248166370832385L);
+        user.setCreateTime(LocalDateTime.now());
+        int rows = userMapper.insert(user);
+        System.out.println("影响行数：" + rows);
+        System.out.println("自增主键：" + user.getId());
+
+    }
+
 }

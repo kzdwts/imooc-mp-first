@@ -1,8 +1,6 @@
 package com.mp.imoocmp.first.entity;
 
-import com.baomidou.mybatisplus.annotation.SqlCondition;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +22,7 @@ public class User extends Model<User> {
     private static final long serialVersionUID = 1L;
 
     // 主键
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     // 姓名
