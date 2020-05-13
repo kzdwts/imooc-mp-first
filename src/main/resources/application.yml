@@ -19,6 +19,9 @@ mybatis-plus:
   - com/mp/imoocmp/first/mapper/*.xml
   global-config:
     db-config:
-      id-type: uuid
-  config-location: mybatis-config.xml
+      id-type: id_worker
+#  config-location: classpath:mybatis-config.xml
+  type-aliases-package: com.mp.imoocmp.first.entity
+  configuration:
+    map-underscore-to-camel-case: true
 

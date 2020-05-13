@@ -23,7 +23,7 @@ public class User extends Model<User> {
 
     // 主键
 //    @TableId(type = IdType.ID_WORKER_STR)
-    private String id;
+    private Long id;
 
     // 姓名
 //    @TableField(condition = SqlCondition.LIKE)
